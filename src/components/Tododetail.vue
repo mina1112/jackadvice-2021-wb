@@ -5,6 +5,9 @@
 </template>
 
 <script>
+export default {
+  name: 'TodoList'
+}
 // ここにjavascriptを書いてね
 </script>
 
