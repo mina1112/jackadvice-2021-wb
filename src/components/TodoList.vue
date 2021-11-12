@@ -21,6 +21,7 @@
                 <div class="goalDate">{{ sampleSchedule.goalDate }}</div>
                 <div class="rest">あと{{ sampleSchedule.rest }}日</div>
               </div>
+              <a v-on:click="show" class="finish">Done!</a>
             </div>
           </div>
         </div>
