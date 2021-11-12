@@ -17,13 +17,10 @@
           >
             <div class="card">
               <div class="todo">
-                <a href="#詳細ページ" class="title">{{
-                  sampleSchedule.title
-                }}</a>
+                <a href="./detail" class="title">{{ sampleSchedule.title }}</a>
                 <div class="goalDate">{{ sampleSchedule.goalDate }}</div>
                 <div class="rest">あと{{ sampleSchedule.rest }}日</div>
               </div>
-              <a class="finish" href="#done">Done!</a>
             </div>
           </div>
         </div>
@@ -36,6 +33,7 @@
 export default {
   name: 'TodoList',
   data() {
+    // const TodoList = () => {
     return {
       sampleSchedules: [
         {
@@ -134,22 +132,27 @@ img {
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 0.6em;
-  bottom: 0.6em;
+  right: 0.6rem;
+  bottom: 0.6rem;
   color: #fff;
   background-color: #ea5532;
   width: 25%;
   height: 2em;
-  border-radius: 0.5em;
-  font-size: 1.1em;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 2px 3px #b3381c;
+  border-bottom: 0.25rem solid #b3381c;
   margin-left: auto;
   margin-bottom: 0;
 }
 
 .finish:hover {
-  background-color: #b3381c;
+  opacity: 0.9;
+}
+
+.finish:active {
+  transform: translate(0.2px);
+  border-bottom: none;
 }
 </style>
