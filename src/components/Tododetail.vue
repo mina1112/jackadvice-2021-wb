@@ -33,6 +33,8 @@
         <div class="finish">
             <a href="#">Done!</a>
         </div>
+
+        <a href="#" @click="deleteItem(index)" class="try">戻る</a>
     </body>
     </html>
   </div>
@@ -43,12 +45,41 @@
 export default {
     name: 'TodoList',
     data(){
-        return {
-            title: "課題１を終わらせる",
-            date1: '',
-            date2: '',
-            date3: '',
-            memo: 'なし'
+        return{
+            sampleSchedules: [
+            {
+              title: '課題１を終わらせる',
+              goalDate: '2021-8-17.19：00',
+              limitDate: '2021-8-20.23：59',
+              notification: '2021-8-16.9：00',
+              memo: 'なし',
+              rest: '2',
+            },
+            {
+              title: 'レポートAを終わらせる',
+              goalDate: '2021-8-20.21:00',
+              limitDate: '2021-8-26.23:00',
+              notification: '8-19.9:00',
+              memo: '4000字だよ一日じゃ終わらないよ',
+              rest: '5',
+            },
+            {
+              title: '経営学テキスト読んでくる',
+              goalDate: '2021-9-1.23:00',
+              limitDate: '2021-9-2.10:30',
+              notification: '2021-8-31.9:00',
+              memo: 'p.123-150',
+              rest: '16',
+            },
+            {
+              title: '機構アカウント作る',
+              goalDate: '2021-9-20.21:00',
+              limitDate: '2021-9-27.23:59',
+              notofication: '2021-9-19.9:00',
+              memo: 'なし',
+              rest: '36',
+            },
+          ],
         }
     },
     watch: {
@@ -74,6 +105,13 @@ export default {
         this.date2 = JSON.parse(localStorage.getItem('date2'))  || [];
         this.date3 = JSON.parse(localStorage.getItem('date3'))  || [];
         this.memo = JSON.parse(localStorage.getItem('memo'))  || [];
+    },
+    methods: {
+        deleteItem: function(index){
+            //モーダルを閉じる
+            // リストからカードを削除
+            this.schedules.splice(index, 1);
+        }
     },
 }
 </script>
@@ -158,5 +196,9 @@ input[type="datetime-local"] {
 
 input[type="text"] {
     font-size: 20px;
+}
+
+.try {
+    color: #b3381c;
 }
 </style>
