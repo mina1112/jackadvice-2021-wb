@@ -43,10 +43,43 @@
 <script>
 // ここにjavascriptを書いてね
 export default {
-    name: 'TodoList',
+    name: 'TodoShowPage',
     data(){
         return{
-            sampleSchedules: [
+            todo: {},
+        }
+    },
+    // watch: {
+    //     title: function() {
+    //         localStorage.setItem('title', JSON.stringify(this.title));
+    //     },
+    //     date1: function() {
+    //         localStorage.setItem('date1', JSON.stringify(this.date1));
+    //     },
+    //     date2: function() {
+    //         localStorage.setItem('date2', JSON.stringify(this.date2));
+    //     },
+    //     date3: function() {
+    //         localStorage.setItem('date3', JSON.stringify(this.date3));
+    //     },
+    //     memo: function() {
+    //         localStorage.setItem('memo', JSON.stringify(this.memo));
+    //     },
+    // },
+    // mounted: function(){
+    //     this.title = JSON.parse(localStorage.getItem('title'))  || [];
+    //     this.date1 = JSON.parse(localStorage.getItem('date1'))  || [];
+    //     this.date2 = JSON.parse(localStorage.getItem('date2'))  || [];
+    //     this.date3 = JSON.parse(localStorage.getItem('date3'))  || [];
+    //     this.memo = JSON.parse(localStorage.getItem('memo'))  || [];
+    // },
+
+    // by ほりしょー
+    // mounted は最初のレンダリングで呼ばれる。
+    // 将来的にはここでAPI(Django)を呼び出してデータを取得する。
+    // 現状は sampleTodos をAPIと見立てて todo に代入してあげている。
+    mounted() {
+        const sampleTodos = [
             {
               title: '課題１を終わらせる',
               goalDate: '2021-8-17.19：00',
@@ -79,32 +112,9 @@ export default {
               memo: 'なし',
               rest: '36',
             },
-          ],
-        }
-    },
-    watch: {
-        title: function() {
-            localStorage.setItem('title', JSON.stringify(this.title));
-        },
-        date1: function() {
-            localStorage.setItem('date1', JSON.stringify(this.date1));
-        },
-        date2: function() {
-            localStorage.setItem('date2', JSON.stringify(this.date2));
-        },
-        date3: function() {
-            localStorage.setItem('date3', JSON.stringify(this.date3));
-        },
-        memo: function() {
-            localStorage.setItem('memo', JSON.stringify(this.memo));
-        },
-    },
-    mounted: function(){
-        this.title = JSON.parse(localStorage.getItem('title'))  || [];
-        this.date1 = JSON.parse(localStorage.getItem('date1'))  || [];
-        this.date2 = JSON.parse(localStorage.getItem('date2'))  || [];
-        this.date3 = JSON.parse(localStorage.getItem('date3'))  || [];
-        this.memo = JSON.parse(localStorage.getItem('memo'))  || [];
+        ]
+        // this.$route.params で URL のパラメータ部分を取得できる。
+        this.todo = sampleTodos[this.$route.params.id]
     },
     methods: {
         deleteItem: function(index){

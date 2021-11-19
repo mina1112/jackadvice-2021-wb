@@ -12,14 +12,15 @@
         </div>
         <div class="main">
           <div
-            v-for="sampleSchedule in sampleSchedules"
-            :key="sampleSchedule.title"
+            v-for="todo in sampleTodos"
+            :key="todo.title"
           >
             <div class="card">
               <div class="todo">
-                <a href="./detail" class="title">{{ sampleSchedule.title }}</a>
-                <div class="goalDate">{{ sampleSchedule.goalDate }}</div>
-                <div class="rest">あと{{ sampleSchedule.rest }}日</div>
+                <!-- ここが遷移の部分。参考：https://router.vuejs.org/ja/api/#to -->
+                <router-link :to="{ name: 'TodoShowPage', params: { id: todo.id }}" class="title">{{ todo.title }}</router-link>
+                <div class="goalDate">{{ todo.goalDate }}</div>
+                <div class="rest">あと{{ todo.rest }}日</div>
               </div>
               <a @click="end" class="finish">Done!</a>
               <!--以下モーダル-->
@@ -43,7 +44,7 @@
 
 <script>
 export default {
-  name: 'TodoList',
+  name: 'TodoIndexPage',
   data() {
     return {
       showContent: false,
@@ -62,7 +63,7 @@ export default {
       ],
       sampleTodos: [
         {
-          id='1',
+          id: 1,
           title: '課題１を終わらせる',
           goalDate: '2021-8-17.19：00',
           limitDate: '2021-8-20.23：59',
@@ -71,6 +72,7 @@ export default {
           rest: '2',
         },
         {
+          id: 2,
           title: 'レポートAを終わらせる',
           goalDate: '2021-8-20.21:00',
           limitDate: '2021-8-26.23:00',
@@ -79,6 +81,7 @@ export default {
           rest: '5',
         },
         {
+          id: 3,
           title: '経営学テキスト読んでくる',
           goalDate: '2021-9-1.23:00',
           limitDate: '2021-9-2.10:30',
@@ -87,6 +90,7 @@ export default {
           rest: '16',
         },
         {
+          id: 4,
           title: '機構アカウント作る',
           goalDate: '2021-9-20.21:00',
           limitDate: '2021-9-27.23:59',

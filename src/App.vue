@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <div id="app">
     <!-- <div
       id="nav"
       class="tab-area-base">
@@ -9,33 +10,12 @@
         <li><router-link to="/detail">Todo Detail</router-link></li>
       </ul>
     </div> -->
-    <router-view />
+      <router-view/>
+    </div>
   </v-app>
-  <!-- <div id="app">
-            <img alt="Vue logo" src="./assets/logo.png">
-            <HelloWorld msg="ほげほげ"/>
-       </div> -->
 </template>
 
-<script>
-// import HelloWorld from './components/HelloWorld.vue';
-// import Login from './components/Login.vue';
-// import TodoDetail from './vomponents/TodoDetail.vue';
-// import TodoList from './components/TodoList.vue';
-
-// export default {
-//   name: 'App',
-
-//   components: {
-//     HelloWorld,
-//     Login,
-//     TodoDetail,
-//     TodoList,
-//   }
-// }
-</script>
-
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
