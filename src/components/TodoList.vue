@@ -21,7 +21,18 @@
                 <div class="goalDate">{{ sampleSchedule.goalDate }}</div>
                 <div class="rest">あと{{ sampleSchedule.rest }}日</div>
               </div>
-              <a v-on:click="show" class="finish">Done!</a>
+              <a @click="end" class="finish">Done!</a>
+              <!--以下モーダル-->
+              <!--
+                v-bindしてpostItemを指定することで、Work.vueで定義されたデータをModal.vueに送ることができる。
+                Modal.vue側でvalueと書くとpostItemのことになる。
+                ここで、postItemはopenModal(item)の引数itemを代入してあるので、結果としてvalueでitemを受け取れる。
+               -->
+              <modal
+                :value="postItem"
+                v-show="showContent"
+                @close="closeModal"
+              />
             </div>
           </div>
         </div>
@@ -34,10 +45,24 @@
 export default {
   name: 'TodoList',
   data() {
-    // const TodoList = () => {
     return {
-      sampleSchedules: [
+      showContent: false,
+      postItem: '',
+      items: [
         {
+          id: 1,
+          desc: 'aaaaa',
+          range: 'iiiii',
+        },
+        {
+          id: 1,
+          desc: 'uuuuu',
+          range: 'eeeee',
+        },
+      ],
+      sampleTodos: [
+        {
+          id='1',
           title: '課題１を終わらせる',
           goalDate: '2021-8-17.19：00',
           limitDate: '2021-8-20.23：59',
@@ -71,6 +96,25 @@ export default {
         },
       ],
     };
+  },
+
+  //画像がクリックされた時に実行されるopenModalメソッド
+  methods: {
+    end: function() {
+      // const openModal = (item) => {
+      //   //showContentというモーダルが表示されているかどうかのステートを管理する変数をtrueに変更
+      //   this.showContent = true;
+
+      //   //Modal.vueにデータを受け渡しする為の変数postItemに、itemを代入
+      //   this.postItem = item;
+      // };
+      const res = confirm('button was clicked.');
+      if (res == true) {
+        alert('おめでとうございます！');
+      } else {
+        alert('キャンセルされました');
+      }
+    },
   },
 };
 </script>
