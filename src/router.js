@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from './components/Login.vue'
 import TodoList from './components/TodoList.vue'
 import Tododetail from './components/Tododetail.vue'
+import OnseiTouroku from './components/OnseiTouroku.vue'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       component: Tododetail
+    },
+    {
+      path: '/touroku',
+      name: 'touroku',
+      component: OnseiTouroku
     }
   ]
 })
