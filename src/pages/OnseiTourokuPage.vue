@@ -11,11 +11,12 @@
     </header>
     <body>
        <div
-            v-for="sampleOnsei in sampleOnseis"
-            :key="sampleOnsei.name" >
-        <div class="onseiname">{{ sampleOnsei.name }}</div>
-        <div class="onseihensyu">編集</div>
+          v-for="sampleOnsei in sampleOnseis"
+          :key="sampleOnsei.name" >
+            <div class="onseiname">{{ sampleOnsei.name }}</div>
+            <div class="onseihensyu">編集</div>
       </div>
+      <hr>
     </body>
   </html>
 </div>

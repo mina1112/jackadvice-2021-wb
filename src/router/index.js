@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/pages/LoginPage.vue'
 import TodoIndexPage from '@/pages/TodoIndexPage.vue'
 import TodoShowPage from '@/pages/TodoShowPage.vue'
+import OnseiTourokuPage from '@/pages/OnseiTourokuPage.vue'
 
 Vue.use(Router)
 
@@ -14,6 +15,7 @@ const routes = [
   // 遷移元は <router-link :to="{ name: 'TodoShowPage', params: { id: todo.id }}"/>でパラメータを渡して飛べる。
   // 遷移先では $route.params.id で取得できる。
   { path: '/todo/:id', name: 'TodoShowPage', component: TodoShowPage },
+  { path: '/onsei', name: 'OnseiTourokuPage', component: OnseiTourokuPage},
 ]
 
 export default new Router({
