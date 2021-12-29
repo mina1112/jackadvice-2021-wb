@@ -7,7 +7,7 @@
         <title>onsei</title>
     </head>
     <header>
-      <img src="#" />
+      <Header />
     </header>
     <body>
        <div
@@ -23,8 +23,14 @@
 </template>
 
 <script>
+import Header from "@/components/Header.vue";
+
+
 export default {
   name: 'OnseiTouroku',
+  components: {
+    Header
+  },
   data() {
     return {
       sampleOnseis: [

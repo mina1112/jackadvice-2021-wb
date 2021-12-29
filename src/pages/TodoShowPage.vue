@@ -8,7 +8,7 @@
     </head>
     <body>
         <header>
-            <img src="assets/logo.png">
+            <Header />
         </header>
         <div class="title">
             タスク：<input type="text" style="border:none" v-model="todo.title">
@@ -38,9 +38,13 @@
 </template>
 
 <script>
-// ここにjavascriptを書いてね
+import Header from "@/components/Header.vue";
+
 export default {
     name: 'TodoShowPage',
+     components: {
+    Header
+    },
     data(){
         return{
             todo: {},

@@ -7,9 +7,9 @@
         <title>List</title>
       </head>
       <body>
-        <div class="header">
-          <img src="#" />
-        </div>
+        <header>
+          <Header />
+        </header>
         <div class="main">
           <div
             v-for="todo in sampleTodos"
@@ -43,8 +43,13 @@
 </template>
 
 <script>
+import Header from "@/components/Header.vue";
+
 export default {
   name: 'TodoIndexPage',
+  components: {
+    Header
+  },
   data() {
     return {
       showContent: false,
