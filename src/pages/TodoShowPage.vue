@@ -8,10 +8,10 @@
     </head>
     <body>
         <header>
-            <img src="assets/logo.png">
+            <img src="../assets/hanamar_icon.jpg">
         </header>
         <div class="title">
-            タスク：<input type="text" style="border:none" v-model="todo.title">
+            タスク:<input type="text" style="border:none" v-model="todo.title">
         </div>
         <div class="goalDate">
             <div class="caption">終わらせたい日時</div>
@@ -29,8 +29,22 @@
         <div class="form">
             <textarea cols="43" rows="4" style="border:none" v-model="todo.memo"></textarea>
         </div>
-        <div class="finish">
-            <a href="#" @click="deleteItem(index)">Done!</a>
+        <div class="btn">
+            <v-btn
+                class=white--text
+                depressed
+                color=#ea5532
+                elevation="2"
+                rounded
+                @click="deleteItem(index)"
+            >Done</v-btn>
+            <v-btn
+                class="ma-2"
+                outlined
+                color=#ea5532
+                elevation="2"
+                rounded
+            >Save</v-btn>
         </div>
     </body>
     </html>
@@ -46,31 +60,6 @@ export default {
             todo: {},
         }
     },
-    // watch: {
-    //     title: function() {
-    //         localStorage.setItem('title', JSON.stringify(this.title));
-    //     },
-    //     date1: function() {
-    //         localStorage.setItem('date1', JSON.stringify(this.date1));
-    //     },
-    //     date2: function() {
-    //         localStorage.setItem('date2', JSON.stringify(this.date2));
-    //     },
-    //     date3: function() {
-    //         localStorage.setItem('date3', JSON.stringify(this.date3));
-    //     },
-    //     memo: function() {
-    //         localStorage.setItem('memo', JSON.stringify(this.memo));
-    //     },
-    // },
-    // mounted: function(){
-    //     this.title = JSON.parse(localStorage.getItem('title'))  || [];
-    //     this.date1 = JSON.parse(localStorage.getItem('date1'))  || [];
-    //     this.date2 = JSON.parse(localStorage.getItem('date2'))  || [];
-    //     this.date3 = JSON.parse(localStorage.getItem('date3'))  || [];
-    //     this.memo = JSON.parse(localStorage.getItem('memo'))  || [];
-    // },
-
     // by ほりしょー
     // mounted は最初のレンダリングで呼ばれる。
     // 将来的にはここでAPI(Django)を呼び出してデータを取得する。
@@ -141,8 +130,8 @@ header {
 }
 
 img {
-    height: 40px;
-    padding: 5px 0 0 10px;
+    height: 50px;
+    padding-left: 8px;
 }
 
 .title{
@@ -179,30 +168,9 @@ img {
     padding-left: 10px;
 }
 
-.finish {
-  display: block;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  background-color: #ea5532;
-  width: 25%;
-  height: 2em;
-  border-radius: 0.5rem;
-  font-size: 1.1rem;
+.btn {
   text-align: center;
-  text-decoration: none;
-  border-bottom: 0.25rem solid #b3381c;
-  margin: 0 auto;
   margin-top: 16px;
-}
-
-.finish:hover {
-  opacity: 0.9;
-}
-
-.finish:active {
-  transform: translate(0.2px);
-  border-bottom: none;
 }
 
 a {
