@@ -129,12 +129,6 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  background-color: #ea5532;
-  width: 100%;
-  height: 50px;
-  margin: 0;
-}
 
 img {
   height: 40px;
