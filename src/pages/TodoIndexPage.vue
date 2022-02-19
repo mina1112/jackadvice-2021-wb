@@ -11,14 +11,15 @@
           <Header />
         </header>
         <div class="main">
-          <div
-            v-for="todo in sampleTodos"
-            :key="todo.title"
-          >
+          <div v-for="todo in sampleTodos" :key="todo.title">
             <div class="card">
               <div class="todo">
                 <!-- ここが遷移の部分。参考：https://router.vuejs.org/ja/api/#to -->
-                <router-link :to="{ name: 'TodoShowPage', params: { id: todo.id }}" class="title">{{ todo.title }}</router-link>
+                <router-link
+                  :to="{ name: 'TodoShowPage', params: { id: todo.id } }"
+                  class="title"
+                  >{{ todo.title }}</router-link
+                >
                 <div class="goalDate">{{ todo.goalDate }}</div>
                 <div class="rest">あと{{ todo.rest }}日</div>
               </div>
@@ -35,6 +36,15 @@
                 @close="closeModal"
               />
             </div>
+          </div>
+
+          <div>
+            <router-link
+              :to="{ name: 'TodoShowPage', params: {} }"
+              class="register"
+            >
+              +新規タスク
+            </router-link>
           </div>
         </div>
       </body>
@@ -109,7 +119,7 @@ export default {
 
   //画像がクリックされた時に実行されるopenModalメソッド
   methods: {
-    end: function() {
+    end: function () {
       // const openModal = (item) => {
       //   //showContentというモーダルが表示されているかどうかのステートを管理する変数をtrueに変更
       //   this.showContent = true;
@@ -124,6 +134,7 @@ export default {
         alert('キャンセルされました');
       }
     },
+    register: function () {},
   },
 };
 </script>
@@ -202,5 +213,22 @@ img {
 .finish:active {
   transform: translate(0.2px);
   border-bottom: none;
+}
+
+.register {
+  position: relative;
+  display: flex;
+  border-radius: 8px;
+  width: 100%;
+  height: 6rem;
+  margin-top: 1em;
+  padding: 10px 10px;
+  color: rgb(48, 48, 48);
+  background-color: rgb(230, 230, 230);
+  box-shadow: 0 2px 5px #ccc;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
 }
 </style>

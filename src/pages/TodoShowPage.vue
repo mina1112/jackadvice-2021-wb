@@ -5,13 +5,13 @@
     <head>
         <meta charset="utf-8">
         <title>ToDo</title>
-    </head>
-    <body>
+      </head>
+      <body>
         <header>
             <Header />
         </header>
         <div class="title">
-            タスク：<input type="text" style="border:none" v-model="todo.title">
+            タスク:<input type="text" style="border:none" v-model="todo.title">
         </div>
         <div class="goalDate">
             <div class="caption">終わらせたい日時</div>
@@ -29,8 +29,22 @@
         <div class="form">
             <textarea cols="43" rows="4" style="border:none" v-model="todo.memo"></textarea>
         </div>
-        <div class="finish">
-            <a href="#" @click="deleteItem(index)">Done!</a>
+        <div class="btn">
+            <v-btn
+                class=white--text
+                depressed
+                color=#ea5532
+                elevation="2"
+                rounded
+                @click="deleteItem(index)"
+            >Done</v-btn>
+            <v-btn
+                class="ma-2"
+                outlined
+                color=#ea5532
+                elevation="2"
+                rounded
+            >Save</v-btn>
         </div>
     </body>
     </html>
@@ -75,6 +89,54 @@ export default {
     //     this.memo = JSON.parse(localStorage.getItem('memo'))  || [];
     // },
 
+  // by ほりしょー
+  // mounted は最初のレンダリングで呼ばれる。
+  // 将来的にはここでAPI(Django)を呼び出してデータを取得する。
+  // 現状は sampleTodos をAPIと見立てて todo に代入してあげている。
+  mounted() {
+    const sampleTodos = [
+      {
+        title: '課題１を終わらせる',
+        goalDate: '2021-8-17.19：00',
+        limitDate: '2021-8-20.23：59',
+        notification: '2021-8-16.9：00',
+        memo: 'なし',
+        rest: '2',
+      },
+      {
+        title: 'レポートAを終わらせる',
+        goalDate: '2021-8-20.21:00',
+        limitDate: '2021-8-26.23:00',
+        notification: '8-19.9:00',
+        memo: '4000字だよ一日じゃ終わらないよ',
+        rest: '5',
+      },
+      {
+        title: '経営学テキスト読んでくる',
+        goalDate: '2021-9-1.23:00',
+        limitDate: '2021-9-2.10:30',
+        notification: '2021-8-31.9:00',
+        memo: 'p.123-150',
+        rest: '16',
+      },
+      {
+        title: '機構アカウント作る',
+        goalDate: '2021-9-20.21:00',
+        limitDate: '2021-9-27.23:59',
+        notofication: '2021-9-19.9:00',
+        memo: 'なし',
+        rest: '36',
+      },
+    ];
+    // this.$route.params で URL のパラメータ部分を取得できる。
+    this.todo = sampleTodos[this.$route.params.id];
+  },
+  methods: {
+    deleteItem: function(index) {
+      //モーダルを閉じる
+      // リストからカードを削除
+      this.schedules.splice(index, 1);
+    },
     // by ほりしょー
     // mounted は最初のレンダリングで呼ばれる。
     // 将来的にはここでAPI(Django)を呼び出してデータを取得する。
@@ -129,6 +191,7 @@ export default {
         }
     },
 }
+}
 </script>
 
 <style scoped>
@@ -140,13 +203,13 @@ export default {
 }
 
 header {
-    height: 50px;
-    background-color:  #ea5532;
+  height: 50px;
+  background-color: #ea5532;
 }
 
 img {
-    height: 40px;
-    padding: 5px 0 0 10px;
+    height: 50px;
+    padding-left: 8px;
 }
 
 .title{
@@ -165,8 +228,8 @@ img {
     padding-top: 20px;
 }
 
-.caption{
-    padding-left: 10px;
+.caption {
+  padding-left: 10px;
 }
 
 .memo{
@@ -177,36 +240,15 @@ img {
 }
 
 .form {
-    border-bottom: 1px solid #ea5532;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 10px;
+  border-bottom: 1px solid #ea5532;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 10px;
 }
 
-.finish {
-  display: block;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  background-color: #ea5532;
-  width: 25%;
-  height: 2em;
-  border-radius: 0.5rem;
-  font-size: 1.1rem;
+.btn {
   text-align: center;
-  text-decoration: none;
-  border-bottom: 0.25rem solid #b3381c;
-  margin: 0 auto;
   margin-top: 16px;
-}
-
-.finish:hover {
-  opacity: 0.9;
-}
-
-.finish:active {
-  transform: translate(0.2px);
-  border-bottom: none;
 }
 
 a {
@@ -223,7 +265,7 @@ input[type="datetime-local"] {
     bottom: 16px;
 }
 
-input[type="text"] {
-    font-size: 20px;
+input[type='text'] {
+  font-size: 20px;
 }
 </style>
