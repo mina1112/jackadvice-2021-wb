@@ -10,7 +10,7 @@
     <body>
         <div class="container">
             <div class="logo">
-                <img src="#">
+                <img src="../assets/hanamar_icon.jpg">
             </div>
             <div class="logIn">
                 <a href="#">log in</a>
