@@ -30,30 +30,25 @@
             <textarea cols="43" rows="4" style="border:none" v-model="todo.memo"></textarea>
         </div>
         <div class="btn">
-            <v-btn
-                class=white--text
-                depressed
-                color=#ea5532
-                elevation="2"
-                rounded
-                @click="deleteItem(index)"
-            >Done</v-btn>
-            <v-btn
-                class="ma-2"
-                outlined
-                color=#ea5532
-                elevation="2"
-                rounded
-            >Save</v-btn>
+            <DoneButton></DoneButton>
+            <SaveButton></SaveButton>
         </div>
+
     </body>
     </html>
   </div>
 </template>
 
 <script>
-// ここにjavascriptを書いてね
+import DoneButton from '../components/DoneButton.vue'
+import SaveButton from '../components/SaveButton.vue'
+
 export default {
+    components: {
+        DoneButton,
+        SaveButton
+    },
+
     name: 'TodoShowPage',
     data(){
         return{
@@ -105,13 +100,6 @@ export default {
             ]
         // this.$route.params で URL のパラメータ部分を取得できる。
         this.todo = sampleTodos[this.$route.params.id-1]
-    },
-    methods: {
-        deleteItem: function(index){
-            // リストからカードを削除
-            this.sampleTodos.splice(index, 1);
-            //モーダルを閉じる
-        }
     },
 }
 </script>
