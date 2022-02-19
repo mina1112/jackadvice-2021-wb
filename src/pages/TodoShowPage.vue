@@ -1,33 +1,51 @@
 <template>
   <div class="detail">
     <html lang="ja">
-    <head>
-        <meta charset="utf-8">
+      <head>
+        <meta charset="utf-8" />
         <title>ToDo</title>
       </head>
       <body>
         <header>
-            <Header />
+          <Header />
         </header>
         <div class="title">
-            タスク:<input type="text" style="border:none" v-model="todo.title">
+          タスク:<input type="text" style="border: none" v-model="todo.title" />
         </div>
         <div class="goalDate">
-            <div class="caption">終わらせたい日時</div>
-            <input type="datetime-local" style="border:none" v-model="todo.goalDate">
+          <div class="caption">終わらせたい日時</div>
+          <input
+            type="datetime-local"
+            style="border: none"
+            v-model="todo.goalDate"
+          />
         </div>
         <div class="limitDate">
-            <div class="caption">締め切り日時</div>
-            <input type="datetime-local" style="border:none" v-model="todo.limitDate">
+          <div class="caption">締め切り日時</div>
+          <input
+            type="datetime-local"
+            style="border: none"
+            v-model="todo.limitDate"
+          />
         </div>
         <div class="notification">
-            <div class="caption">通知</div>
-            <input type="datetime-local" style="border:none" v-model="todo.notification">
+          <div class="caption">通知</div>
+          <input
+            type="datetime-local"
+            style="border: none"
+            v-model="todo.notification"
+          />
         </div>
         <div class="memo">メモ</div>
         <div class="form">
-            <textarea cols="43" rows="4" style="border:none" v-model="todo.memo"></textarea>
+          <textarea
+            cols="43"
+            rows="4"
+            style="border: none"
+            v-model="todo.memo"
+          ></textarea>
         </div>
+
         <div class="btn">
             <DoneButton></DoneButton>
             <SaveButton></SaveButton>
@@ -162,35 +180,37 @@ header {
 }
 
 img {
-    height: 50px;
-    padding-left: 8px;
+  height: 50px;
+  padding-left: 8px;
 }
 
-.title{
-    font-size: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 10px;
-    color: rgb(100, 100, 100);
+.title {
+  font-size: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  color: rgb(100, 100, 100);
 }
 
-.goalDate, .limitDate, .notification {
-    display: flex;
-    border-top: 1px solid #ea5532;
-    justify-content: space-between;
-    color: rgb(100, 100, 100);
-    padding-top: 20px;
+.goalDate,
+.limitDate,
+.notification {
+  display: flex;
+  border-top: 1px solid #ea5532;
+  justify-content: space-between;
+  color: rgb(100, 100, 100);
+  padding-top: 20px;
 }
 
 .caption {
   padding-left: 10px;
 }
 
-.memo{
-    border-top: 1px solid #ea5532;
-    padding-top: 16px;
-    padding-left: 10px;
-    color: rgb(100, 100, 100);
+.memo {
+  border-top: 1px solid #ea5532;
+  padding-top: 16px;
+  padding-left: 10px;
+  color: rgb(100, 100, 100);
 }
 
 .form {
@@ -206,17 +226,17 @@ img {
 }
 
 a {
-    text-decoration: none;
-    color: white!important;
+  text-decoration: none;
+  color: white !important;
 }
 
-input[type="datetime-local"] {
-    height: 30px;
-    margin-top: 12px;
-    margin-right: 10px;
-    width: 185px;
-    position: relative;
-    bottom: 16px;
+input[type='datetime-local'] {
+  height: 30px;
+  margin-top: 12px;
+  margin-right: 10px;
+  width: 185px;
+  position: relative;
+  bottom: 16px;
 }
 
 input[type='text'] {
