@@ -5,10 +5,10 @@
     <head>
         <meta charset="utf-8">
         <title>ToDo</title>
-    </head>
-    <body>
+      </head>
+      <body>
         <header>
-            <img src="../assets/hanamar_icon.jpg">
+            <Header />
         </header>
         <div class="title">
             タスク:<input type="text" style="border:none" v-model="todo.title">
@@ -42,18 +42,92 @@
 <script>
 import DoneButton from '../components/DoneButton.vue'
 import SaveButton from '../components/SaveButton.vue'
+import Header from '../components/Header.vue'
 
 export default {
+    name: 'TodoShowPage',
     components: {
         DoneButton,
-        SaveButton
+        SaveButton,
+        Header
     },
-
-    name: 'TodoShowPage',
     data(){
         return{
             todo: {},
         }
+    },
+    // watch: {
+    //     title: function() {
+    //         localStorage.setItem('title', JSON.stringify(this.title));
+    //     },
+    //     date1: function() {
+    //         localStorage.setItem('date1', JSON.stringify(this.date1));
+    //     },
+    //     date2: function() {
+    //         localStorage.setItem('date2', JSON.stringify(this.date2));
+    //     },
+    //     date3: function() {
+    //         localStorage.setItem('date3', JSON.stringify(this.date3));
+    //     },
+    //     memo: function() {
+    //         localStorage.setItem('memo', JSON.stringify(this.memo));
+    //     },
+    // },
+    // mounted: function(){
+    //     this.title = JSON.parse(localStorage.getItem('title'))  || [];
+    //     this.date1 = JSON.parse(localStorage.getItem('date1'))  || [];
+    //     this.date2 = JSON.parse(localStorage.getItem('date2'))  || [];
+    //     this.date3 = JSON.parse(localStorage.getItem('date3'))  || [];
+    //     this.memo = JSON.parse(localStorage.getItem('memo'))  || [];
+    // },
+
+  // by ほりしょー
+  // mounted は最初のレンダリングで呼ばれる。
+  // 将来的にはここでAPI(Django)を呼び出してデータを取得する。
+  // 現状は sampleTodos をAPIと見立てて todo に代入してあげている。
+  mounted() {
+    const sampleTodos = [
+      {
+        title: '課題１を終わらせる',
+        goalDate: '2021-8-17.19：00',
+        limitDate: '2021-8-20.23：59',
+        notification: '2021-8-16.9：00',
+        memo: 'なし',
+        rest: '2',
+      },
+      {
+        title: 'レポートAを終わらせる',
+        goalDate: '2021-8-20.21:00',
+        limitDate: '2021-8-26.23:00',
+        notification: '8-19.9:00',
+        memo: '4000字だよ一日じゃ終わらないよ',
+        rest: '5',
+      },
+      {
+        title: '経営学テキスト読んでくる',
+        goalDate: '2021-9-1.23:00',
+        limitDate: '2021-9-2.10:30',
+        notification: '2021-8-31.9:00',
+        memo: 'p.123-150',
+        rest: '16',
+      },
+      {
+        title: '機構アカウント作る',
+        goalDate: '2021-9-20.21:00',
+        limitDate: '2021-9-27.23:59',
+        notofication: '2021-9-19.9:00',
+        memo: 'なし',
+        rest: '36',
+      },
+    ];
+    // this.$route.params で URL のパラメータ部分を取得できる。
+    this.todo = sampleTodos[this.$route.params.id];
+  },
+  methods: {
+    deleteItem: function(index) {
+      //モーダルを閉じる
+      // リストからカードを削除
+      this.schedules.splice(index, 1);
     },
     // by ほりしょー
     // mounted は最初のレンダリングで呼ばれる。
@@ -102,6 +176,7 @@ export default {
         this.todo = sampleTodos[this.$route.params.id-1]
     },
 }
+}
 </script>
 
 <style scoped>
@@ -113,8 +188,8 @@ export default {
 }
 
 header {
-    height: 50px;
-    background-color:  #ea5532;
+  height: 50px;
+  background-color: #ea5532;
 }
 
 img {
@@ -138,8 +213,8 @@ img {
     padding-top: 20px;
 }
 
-.caption{
-    padding-left: 10px;
+.caption {
+  padding-left: 10px;
 }
 
 .memo{
@@ -150,10 +225,10 @@ img {
 }
 
 .form {
-    border-bottom: 1px solid #ea5532;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 10px;
+  border-bottom: 1px solid #ea5532;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 10px;
 }
 
 .btn {
@@ -175,7 +250,7 @@ input[type="datetime-local"] {
     bottom: 16px;
 }
 
-input[type="text"] {
-    font-size: 20px;
+input[type='text'] {
+  font-size: 20px;
 }
 </style>
