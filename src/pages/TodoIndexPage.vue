@@ -11,30 +11,11 @@
           <Header />
         </header>
         <div class="main">
-          <!-- <div v-for="todo in sampleTodos" :key="todo.id">
-            <div class="card">
-              <div class="todo">
-                ここが遷移の部分。参考：https://router.vuejs.org/ja/api/#to
-                <router-link
-                  :to="{ name: 'TodoShowPage', params: { id: todo.id } }"
-                  class="title"
-                  >{{ todo.title }}</router-link
-                >
-                <div class="goalDate">{{ todo.goalDate }}</div>
-                <div class="rest">あと{{ todo.rest }}日</div>
-              </div>
-              <a @click="end" class="finish">Done!</a>
-              <a href="" class="finish">Done!</a>
-              以下モーダル
-                v-bindしてpostItemを指定することで、Work.vueで定義されたデータをModal.vueに送ることができる。
-                Modal.vue側でvalueと書くとpostItemのことになる。
-                ここで、postItemはopenModal(item)の引数itemを代入してあるので、結果としてvalueでitemを受け取れる。
-              <modal
+          <!-- <modal
                 :value="postItem"
                 v-show="showContent"
                 @close="closeModal"
-              />
-            </div> -->
+              /> -->
           <ul v-for="todo in todo" :key="todo.id">
             <div class="card">
               <div class="todo">
@@ -46,10 +27,9 @@
                 <div class="goalDate">{{ todo.completed }}</div>
                 <div class="rest">あと{{ todo.id }}日</div>
               </div>
-              <a href="" class="finish">Done!</a>
+              <DoneButton class="finish"></DoneButton>
             </div>
           </ul>
-          <!-- </div> -->
 
           <div>
             <router-link
@@ -68,11 +48,13 @@
 <script>
 import Header from '@/components/Header.vue';
 import axios from 'axios';
+import DoneButton from '@/components/DoneButton.vue';
 
 export default {
   name: 'TodoIndexPage',
   components: {
     Header,
+    DoneButton,
   },
   data() {
     return {
@@ -138,12 +120,6 @@ export default {
       .then((response) => (this.todo = response.data))
       .catch((error) => console.log(error));
   },
-
-  // method: {
-  //   end() {
-  //     console.log('hogehoge');
-  //   },
-  // },
 
   //画像がクリックされた時に実行されるopenModalメソッド
   // methods: {
@@ -220,15 +196,12 @@ img {
   position: absolute;
   right: 0.6rem;
   bottom: 0.6rem;
-  color: #fff;
-  background-color: #ea5532;
   width: 25%;
   height: 2em;
   border-radius: 0.5rem;
   font-size: 1.1rem;
   text-align: center;
   text-decoration: none;
-  border-bottom: 0.25rem solid #b3381c;
   margin-left: auto;
   margin-bottom: 0;
 }
