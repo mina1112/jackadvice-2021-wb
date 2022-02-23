@@ -11,11 +11,6 @@
           <Header />
         </header>
         <div class="main">
-          <!-- <modal
-                :value="postItem"
-                v-show="showContent"
-                @close="closeModal"
-              /> -->
           <ul v-for="todo in todo" :key="todo.id">
             <div class="card">
               <div class="todo">
@@ -59,20 +54,6 @@ export default {
   data() {
     return {
       todo: null,
-      // showContent: false,
-      // postItem: '',
-      // items: [
-      //   {
-      //     id: 1,
-      //     desc: 'aaaaa',
-      //     range: 'iiiii',
-      //   },
-      //   {
-      //     id: 1,
-      //     desc: 'uuuuu',
-      //     range: 'eeeee',
-      //   },
-      // ],
       //   todos: [
       //     {
       //       id: 1,
@@ -120,26 +101,6 @@ export default {
       .then((response) => (this.todo = response.data))
       .catch((error) => console.log(error));
   },
-
-  //画像がクリックされた時に実行されるopenModalメソッド
-  // methods: {
-  //   end: function () {
-  //     const openModal = (item) => {
-  //       //showContentというモーダルが表示されているかどうかのステートを管理する変数をtrueに変更
-  //       this.showContent = true;
-
-  //       //Modal.vueにデータを受け渡しする為の変数postItemに、itemを代入
-  //       this.postItem = item;
-  //     };
-  //     const res = confirm('button was clicked.');
-  //     if (res == true) {
-  //       alert('おめでとうございます！');
-  //     } else {
-  //       alert('キャンセルされました');
-  //     }
-  //   },
-  //   register: function () {},
-  // },
 };
 </script>
 
