@@ -43,6 +43,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import axios from 'axios'
 
 
 export default {
@@ -53,26 +54,45 @@ export default {
 
   data() {
     return {
-       showContent: false,
-       postItem: '',
-       sampleOnseis: [
-        {
-          id: 1,
-          title: '音声ファイル１',
-        },
-         {
-          id: 2,
-          title: '音声ファイル2',
-        },
-         {
-          id: 3,
-          title: '音声ファイル3',
-        }
-      ],
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+       mp3_url: "", //音声ファイルの中身
+      //  showContent: false,
+      //  postItem: '',
+      //  sampleOnseis: [
+      //   {
+      //     id: 1,
+      //     title: '音声ファイル1',
+      //   },
+      //    {
+      //     id: 2,
+      //     title: '音声ファイル2',
+      //   },
+      //    {
+      //     id: 3,
+      //     title: '音声ファイル3',
+      //   }
+      // ],
+      // items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
     }
+  },
+    mounted () {
+    this.response = axios.get("https://post.s3-ap-northeast-1.amazonaws.com/local/"+this.username+"/"+this.$route.params['postId']+".mp3")
+    .then((response) => (this.todo = response.data))
+    .catch((error) => console.log(error));
+      // .then((res) => {
+      //   return res;
+      // }, this);
+      // if (this.response.status === 403) {
+      //   console.log("エラー！");
+      //   this.mp3_url = null;
+      //   console.log(this.mp3_url);
+      // } else {
+      //   console.log("取得した");
+      //   this.mp3_url = this.response.config.url;
+      //   console.log(this.mp3_url);
+      // }
+    },
   }
-}
+
 
 </script>
 
