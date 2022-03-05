@@ -1,11 +1,5 @@
 <template>
   <div class="detail">
-    <html lang="ja">
-      <head>
-        <meta charset="utf-8" />
-        <title>ToDo</title>
-      </head>
-      <body>
         <header>
           <Header />
         </header>
@@ -45,14 +39,10 @@
             v-model="todo.memo"
           ></textarea>
         </div>
-
         <div class="btn">
             <DoneButton></DoneButton>
             <SaveButton @click.native="SaveData"></SaveButton>
         </div>
-
-    </body>
-    </html>
   </div>
 </template>
 
@@ -71,60 +61,26 @@ export default {
     },
     data(){
         return{
-            todo: [],
-            title: '',
-            goalDate: '',
-            limitDate: '',
-            notification: '',
-            memo: ''
+            todo: {},
         }
     },
+    // todo一覧からidを取得->そのidに対応するdataをAPIから取得
     mounted() {
-      const sampleTodos = [
-        {
-          id: 1,
-          title: '課題1を終わらせる',
-          goalDate: '2021-08-17T19:00',
-          limitDate: '2021-08-20T23:59',
-          notification: '2021-08-16T09:00',
-          memo: 'なし',
-          rest: '2',
-        },
-        {
-          id: 2,
-          title: 'レポートAを終わらせる',
-          goalDate: '2021-08-20T21:00',
-          limitDate: '2021-08-26T23:00',
-          notification: '2021-08-19T09:00',
-          memo: '4000字だよ一日じゃ終わらないよ',
-          rest: '5',
-        },
-        {
-          id: 3,
-          title: '経営学テキスト読んでくる',
-          goalDate: '2021-09-01T23:00',
-          limitDate: '2021-09-02T10:30',
-          notification: '2021-08-31T09:00',
-          memo: 'p.123-150',
-          rest: '16',
-        },
-        {
-          id: 4,
-          title: '機構アカウント作る',
-          goalDate: '2021-09-20T21:00',
-          limitDate: '2021-09-27T23:59',
-          notofication: '2021-09-19T09:00',
-          memo: 'なし',
-          rest: '36',
-        },
-      ];
-      this.todo = sampleTodos[this.$route.params.id-1];
+      axios
+        .get('https://jsonplaceholder.typicode.com/todos/')
+        .then(response => {
+          this.todo = response.data[this.$route.params.id-1]
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
+    //SaveButtonのPost
     methods: {
-      //SaveButtonのPost
       SaveData: function(){
       axios
         .post('https://jsonplaceholder.typicode.com/posts/', {
+          id: this.todo.id,
           title: this.todo.title,
           goalDate: this.todo.goalDate,
           limitDate: this.todo.limitDate,
@@ -133,7 +89,7 @@ export default {
         })
         .then(response => {
           // unshift使えない??
-          this.todo.unshift(response.data)
+          // this.todo.shift(response.data)
           console.log(response.data);
         })
         .catch(error => console.log(error))
