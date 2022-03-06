@@ -1,58 +1,51 @@
 <template>
   <div class="detail">
-    <html lang="ja">
-      <head>
-        <meta charset="utf-8" />
-        <title>ToDo</title>
-      </head>
-      <body>
-        <header>
-          <Header />
-        </header>
-        <div class="title">
-          タスク:<input type="text" style="border: none" v-model="todo.title" />
-        </div>
-        <div class="goalDate">
+    <header>
+      <Header />
+    </header>
+    <v-col cols="12" class="top">
+      <v-text-field v-model="todo.title" label="タスク" color="#ea5532" outlined></v-text-field>
+    </v-col>
+    <v-col cols="12" class="second">
+      <v-row>
+        <v-col cols="4">
           <div class="caption">終わらせたい日時</div>
-          <input
-            type="datetime-local"
-            style="border: none"
-            v-model="todo.goalDate"
-          />
-        </div>
-        <div class="limitDate">
+        </v-col>
+        <v-col cols="8">
+          <input type="datetime-local" style="border: none" v-model="todo.goalDate"/>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-divider color="#ea5532"></v-divider>
+    <v-col cols="12">
+      <v-row>
+        <v-col cols="4">
           <div class="caption">締め切り日時</div>
-          <input
-            type="datetime-local"
-            style="border: none"
-            v-model="todo.limitDate"
-          />
-        </div>
-        <div class="notification">
+        </v-col>
+        <v-col cols="8">
+          <input type="datetime-local" style="border: none" v-model="todo.limitDate"/>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-divider color="#ea5532"></v-divider>
+    <v-col cols="12">
+      <v-row>
+        <v-col cols="4">
           <div class="caption">通知</div>
-          <input
-            type="datetime-local"
-            style="border: none"
-            v-model="todo.notification"
-          />
-        </div>
-        <div class="memo">メモ</div>
-        <div class="form">
-          <textarea
-            cols="43"
-            rows="4"
-            style="border: none"
-            v-model="todo.memo"
-          ></textarea>
-        </div>
-
-        <div class="btn">
-            <DoneButton></DoneButton>
-            <SaveButton @click.native="SaveData"></SaveButton>
-        </div>
-
-    </body>
-    </html>
+        </v-col>
+        <v-col cols="8">
+          <input type="datetime-local" style="border: none" v-model="todo.notification"/>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-divider color="#ea5532"></v-divider>
+    <v-col cols="12">
+      <v-textarea v-model="todo.memo" label="メモ" color="#ea5532"></v-textarea>
+    </v-col>
+    <div class="btn">
+      <DoneButton></DoneButton>
+      <SaveButton @click.native="SaveData"></SaveButton>
+    </div>
   </div>
 </template>
 
@@ -71,69 +64,33 @@ export default {
     },
     data(){
         return{
-            todo: [],
-            title: '',
-            goalDate: '',
-            limitDate: '',
-            notification: '',
-            memo: ''
+            todo: {
+              title: '',
+              goalDate: '',
+              limitDate: '',
+              notification: '',
+              memo: ''
+            },
         }
     },
+    // todo一覧からidを取得->そのidに対応するdataをAPIから取得
     mounted() {
-      const sampleTodos = [
-        {
-          id: 1,
-          title: '課題1を終わらせる',
-          goalDate: '2021-08-17T19:00',
-          limitDate: '2021-08-20T23:59',
-          notification: '2021-08-16T09:00',
-          memo: 'なし',
-          rest: '2',
-        },
-        {
-          id: 2,
-          title: 'レポートAを終わらせる',
-          goalDate: '2021-08-20T21:00',
-          limitDate: '2021-08-26T23:00',
-          notification: '2021-08-19T09:00',
-          memo: '4000字だよ一日じゃ終わらないよ',
-          rest: '5',
-        },
-        {
-          id: 3,
-          title: '経営学テキスト読んでくる',
-          goalDate: '2021-09-01T23:00',
-          limitDate: '2021-09-02T10:30',
-          notification: '2021-08-31T09:00',
-          memo: 'p.123-150',
-          rest: '16',
-        },
-        {
-          id: 4,
-          title: '機構アカウント作る',
-          goalDate: '2021-09-20T21:00',
-          limitDate: '2021-09-27T23:59',
-          notofication: '2021-09-19T09:00',
-          memo: 'なし',
-          rest: '36',
-        },
-      ];
-      this.todo = sampleTodos[this.$route.params.id-1];
+      axios
+        .get('https://jsonplaceholder.typicode.com/todos/')
+        .then(response => {
+          this.todo = response.data[this.$route.params.id-1]
+          console.log(this.todo)
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
+    //データの更新
     methods: {
-      //SaveButtonのPost
       SaveData: function(){
       axios
-        .post('https://jsonplaceholder.typicode.com/posts/', {
-          title: this.todo.title,
-          goalDate: this.todo.goalDate,
-          limitDate: this.todo.limitDate,
-          notification: this.todo.notification,
-          memo: this.todo.memo
-        })
+        .put('https://jsonplaceholder.typicode.com/posts/' + this.todo.id, this.todo)
         .then(response => {
-          // unshift使えない??
-          this.todo.unshift(response.data)
           console.log(response.data);
         })
         .catch(error => console.log(error))
@@ -143,73 +100,15 @@ export default {
 </script>
 
 <style scoped>
-
-.detail{
-  text-align: left;
-    font-size: 16px!important;
-}
-
-img {
-  height: 50px;
-  padding-left: 8px;
-}
-
-.title {
-  font-size: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 10px;
-  color: rgb(100, 100, 100);
-}
-
-.goalDate,
-.limitDate,
-.notification {
-  display: flex;
-  border-top: 1px solid #ea5532;
-  justify-content: space-between;
-  color: rgb(100, 100, 100);
-  padding-top: 20px;
-}
-
-.caption {
-  padding-left: 10px;
-}
-
-.memo {
-  border-top: 1px solid #ea5532;
-  padding-top: 16px;
-  padding-left: 10px;
-  color: rgb(100, 100, 100);
-}
-
-.form {
-  border-bottom: 1px solid #ea5532;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-left: 10px;
-}
-
 .btn {
   text-align: center;
+}
+
+.top {
   margin-top: 16px;
 }
 
-a {
-  text-decoration: none;
-  color: white !important;
-}
-
-input[type='datetime-local'] {
-  height: 30px;
-  margin-top: 12px;
-  margin-right: 10px;
-  width: 200px;
-  position: relative;
-  bottom: 16px;
-}
-
-input[type='text'] {
-  font-size: 20px;
+.second {
+  margin-top: -32px;
 }
 </style>
