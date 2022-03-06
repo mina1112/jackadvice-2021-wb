@@ -31,7 +31,7 @@
                 <div class="onseiname text-left">{{ sampleOnsei.title }}</div>
               </v-col>
               <v-col cols="2">
-                <button id="onseihensyu">編集</button>
+                <button id="onseihensyu">編集</button><!--編集と削除はブックマーク記事を参考にアイコンで作る予定-->
               </v-col>
         </v-row>
       </v-container>
