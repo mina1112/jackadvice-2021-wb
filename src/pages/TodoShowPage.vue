@@ -1,48 +1,51 @@
 <template>
   <div class="detail">
-        <header>
-          <Header />
-        </header>
-        <div class="title">
-          タスク:<input type="text" style="border: none" v-model="todo.title" />
-        </div>
-        <div class="goalDate">
+    <header>
+      <Header />
+    </header>
+    <v-col cols="12" class="top">
+      <v-text-field v-model="todo.title" label="タスク" color="#ea5532" outlined></v-text-field>
+    </v-col>
+    <v-col cols="12" class="second">
+      <v-row>
+        <v-col cols="4">
           <div class="caption">終わらせたい日時</div>
-          <input
-            type="datetime-local"
-            style="border: none"
-            v-model="todo.goalDate"
-          />
-        </div>
-        <div class="limitDate">
+        </v-col>
+        <v-col cols="8">
+          <input type="datetime-local" style="border: none" v-model="todo.goalDate"/>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-divider color="#ea5532"></v-divider>
+    <v-col cols="12">
+      <v-row>
+        <v-col cols="4">
           <div class="caption">締め切り日時</div>
-          <input
-            type="datetime-local"
-            style="border: none"
-            v-model="todo.limitDate"
-          />
-        </div>
-        <div class="notification">
+        </v-col>
+        <v-col cols="8">
+          <input type="datetime-local" style="border: none" v-model="todo.limitDate"/>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-divider color="#ea5532"></v-divider>
+    <v-col cols="12">
+      <v-row>
+        <v-col cols="4">
           <div class="caption">通知</div>
-          <input
-            type="datetime-local"
-            style="border: none"
-            v-model="todo.notification"
-          />
-        </div>
-        <div class="memo">メモ</div>
-        <div class="form">
-          <textarea
-            cols="43"
-            rows="4"
-            style="border: none"
-            v-model="todo.memo"
-          ></textarea>
-        </div>
-        <div class="btn">
-            <DoneButton></DoneButton>
-            <SaveButton @click.native="SaveData"></SaveButton>
-        </div>
+        </v-col>
+        <v-col cols="8">
+          <input type="datetime-local" style="border: none" v-model="todo.notification"/>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-divider color="#ea5532"></v-divider>
+    <v-col cols="12">
+      <v-textarea v-model="todo.memo" label="メモ" color="#ea5532"></v-textarea>
+    </v-col>
+    <div class="btn">
+      <DoneButton></DoneButton>
+      <SaveButton @click.native="SaveData"></SaveButton>
+    </div>
   </div>
 </template>
 
@@ -97,73 +100,15 @@ export default {
 </script>
 
 <style scoped>
-
-.detail{
-  text-align: left;
-    font-size: 16px!important;
-}
-
-img {
-  height: 50px;
-  padding-left: 8px;
-}
-
-.title {
-  font-size: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 10px;
-  color: rgb(100, 100, 100);
-}
-
-.goalDate,
-.limitDate,
-.notification {
-  display: flex;
-  border-top: 1px solid #ea5532;
-  justify-content: space-between;
-  color: rgb(100, 100, 100);
-  padding-top: 20px;
-}
-
-.caption {
-  padding-left: 10px;
-}
-
-.memo {
-  border-top: 1px solid #ea5532;
-  padding-top: 16px;
-  padding-left: 10px;
-  color: rgb(100, 100, 100);
-}
-
-.form {
-  border-bottom: 1px solid #ea5532;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-left: 10px;
-}
-
 .btn {
   text-align: center;
+}
+
+.top {
   margin-top: 16px;
 }
 
-a {
-  text-decoration: none;
-  color: white !important;
-}
-
-input[type='datetime-local'] {
-  height: 30px;
-  margin-top: 12px;
-  margin-right: 10px;
-  width: 200px;
-  position: relative;
-  bottom: 16px;
-}
-
-input[type='text'] {
-  font-size: 20px;
+.second {
+  margin-top: -32px;
 }
 </style>
