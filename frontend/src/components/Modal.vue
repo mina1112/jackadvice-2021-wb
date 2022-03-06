@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: 'DoneAction',
+    name: 'DoneAction',//propsで受け取ったデータをcomputedで再定義して使うよ
     data() {
         
     }
