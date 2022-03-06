@@ -61,7 +61,13 @@ export default {
     },
     data(){
         return{
-            todo: {},
+            todo: {
+              title: '',
+              goalDate: '',
+              limitDate: '',
+              notification: '',
+              memo: ''
+            },
         }
     },
     // todo一覧からidを取得->そのidに対応するdataをAPIから取得
@@ -70,26 +76,18 @@ export default {
         .get('https://jsonplaceholder.typicode.com/todos/')
         .then(response => {
           this.todo = response.data[this.$route.params.id-1]
+          console.log(this.todo)
         })
         .catch(error => {
           console.log(error);
         });
     },
-    //SaveButtonのPost
+    //データの更新
     methods: {
       SaveData: function(){
       axios
-        .post('https://jsonplaceholder.typicode.com/posts/', {
-          id: this.todo.id,
-          title: this.todo.title,
-          goalDate: this.todo.goalDate,
-          limitDate: this.todo.limitDate,
-          notification: this.todo.notification,
-          memo: this.todo.memo
-        })
+        .put('https://jsonplaceholder.typicode.com/posts/' + this.todo.id, this.todo)
         .then(response => {
-          // unshift使えない??
-          // this.todo.shift(response.data)
           console.log(response.data);
         })
         .catch(error => console.log(error))
