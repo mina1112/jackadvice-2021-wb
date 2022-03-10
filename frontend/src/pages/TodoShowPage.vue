@@ -11,7 +11,7 @@
         <v-col cols="4">
           <div class="caption">終わらせたい日時</div>
         </v-col>
-        <v-col cols="8">
+        <v-col cols="8" class="try">
           <input type="datetime-local" style="border: none" v-model="todo.goalDate"/>
         </v-col>
       </v-row>
@@ -110,5 +110,9 @@ export default {
 
 .second {
   margin-top: -32px;
+}
+
+input {
+  margin: 0 0 0 auto;
 }
 </style>

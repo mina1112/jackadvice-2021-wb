@@ -54,7 +54,7 @@ import Header from '../components/Header.vue'
 import axios from 'axios'
 
 export default {
-    name: 'TodoShowPage',
+    name: 'TodoRegisterPage',
     components: {
         SaveButton,
         Header
