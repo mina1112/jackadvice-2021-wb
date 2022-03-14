@@ -28,7 +28,7 @@
 
           <div>
             <router-link
-              :to="{ name: 'TodoShowPage', params: {} }"
+              :to="{ name: 'NewRegisterPage', param: {} }"
               class="register"
             >
               +新規タスク
