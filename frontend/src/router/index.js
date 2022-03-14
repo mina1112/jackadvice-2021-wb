@@ -4,6 +4,7 @@ import Login from '@/pages/LoginPage.vue'
 import TodoIndexPage from '@/pages/TodoIndexPage.vue'
 import TodoShowPage from '@/pages/TodoShowPage.vue'
 import OnseiTourokuPage from '@/pages/OnseiTourokuPage.vue'
+import NewRegisterPage from '@/pages/NewRegister.vue'
 
 Vue.use(Router)
 
