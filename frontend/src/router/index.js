@@ -16,6 +16,7 @@ const routes = [
   // 遷移先では $route.params.id で取得できる。
   { path: '/todo/:id', name: 'TodoShowPage', component: TodoShowPage },
   { path: '/onsei', name: 'OnseiTourokuPage', component: OnseiTourokuPage},
+  { path: '/register', name: 'NewRegisterPage', component: NewRegisterPage}
 ]
 
 export default new Router({
