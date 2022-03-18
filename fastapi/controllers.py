@@ -23,10 +23,10 @@ def admin(request: Request):
     db.session.close()
     task = [{
         'id': t.id,
-        'content': t.content,
-        'taskname': t.taskname,
-        'deadline': t.deadline.strftime('%Y-%m-%d %H:%M:%S'),
-        'date': t.date.strftime('%Y-%m-%d %H:%M:%S'),
+        'title': t.title,
+        'goalDate': t.goalDate.strftime('%Y-%m-%d %H:%M:%S'),
+        'limitDate': t.limitDate.strftime('%Y-%m-%d %H:%M:%S'),
+        'notification': t.notification.strftime('%Y-%m-%d %H:%M:%S'),
         'done': t.done,
     } for t in task]
     
@@ -36,16 +36,18 @@ def admin(request: Request):
 
 def detail(request: Request, t_id):
 
-    task = db.session.query(Task).filter(Task.id == t_id).first()
+    t = db.session.query(Task).filter(Task.id == t_id).first()
     db.session.close()
-    task = [{
+    
+    task = {
         'id': t.id,
-        'content': t.content,
-        'taskname': t.taskname,
-        'deadline': t.deadline.strftime('%Y-%m-%d %H:%M:%S'),
-        'date': t.date.strftime('%Y-%m-%d %H:%M:%S'),
+        'title': t.title,
+        'goalDate': t.goalDate.strftime('%Y-%m-%d %H:%M:%S'),
+        'limitDate': t.limitDate.strftime('%Y-%m-%d %H:%M:%S'),
+        'notification': t.notification.strftime('%Y-%m-%d %H:%M:%S'),
         'done': t.done,
-    } for t in task]
+    }
+    
     return JSONResponse(content = task)
 
 async def add(request: Request):

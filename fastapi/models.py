@@ -1,5 +1,7 @@
 from datetime import date, datetime
 
+from matplotlib.pyplot import title
+
 from db import Base
 
 from sqlalchemy import Column, String, DateTime, ForeignKey
@@ -45,13 +47,14 @@ class Task(Base):
     """
     toDoタスク
 
-    id       : 主キー
-    user_id  : 外部キー
-    taskname : taskの名前
-    content  : 内容
-    deadline : 締め切り
-    date     : 通知日
-    done     : タスクを終了したか
+    id               : 主キー
+    user_id          : 外部キー
+    title            : taskの名前
+    goaldatte        :目標日
+    deadline         : 締め切り
+    notification     : 通知日
+    memo             : メモ
+    done             : タスクを終了したか
     """
     __tablename__ = 'task'
     id = Column(
@@ -62,22 +65,35 @@ class Task(Base):
     )
 
     user_id = Column('user_id', ForeignKey('user.id'))
-    taskname = Column("taskname", String(256))
-    content = Column('content', String(256))
-    deadline = Column(
-        'deadline',
+    title = Column("title", String(256))
+    goalDate = Column(
+        'goalData',
+        DateTime,
+        default=None,
+        nullable=False,
+    )
+    limitDate = Column(
+        'limitDate',
+        DateTime,
+        default=None,
+        nullable=False,
+    )
+    notification = Column(
+        'notification',
         DateTime,
         default=None,
         nullable=False,
     )
     date = Column("date", DateTime, default=None)
+    memo = Column('memo', String(256))
     done = Column('done', BOOLEAN, default=False, nullable=False)
 
-    def __init__(self, user_id: int, taskname: str, content: str, deadline: datetime, date: datetime = datetime.now()):
+    def __init__(self, user_id: int, title: str, memo: str, goalDate: datetime, limitDate: datetime, notificaiton: datetime):
         self.user_id = user_id
-        self.taskname = taskname
-        self.content = content
-        self.date = date
-        self.deadline = deadline
+        self.title = title
+        self.goalDate = goalDate
+        self.limitDate = limitDate
+        self.notification = notificaiton
+        self.memo = memo
         self.done = False
 

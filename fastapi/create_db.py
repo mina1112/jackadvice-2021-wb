@@ -19,10 +19,11 @@ if __name__ == "__main__":
     # サンプルタスク
     task = Task(
         user_id=admin.id,
-        taskname='サンプル',
-        content='〇〇の締め切り',
-        date=datetime(2022, 3, 18, 21, 25, 00),
-        deadline=datetime(2022, 12, 25, 12, 00, 00),
+        title ='サンプル',
+        goalDate=datetime(2022, 3, 20, 18, 00, 00),
+        limitDate=datetime(2022, 3, 21, 21, 25, 00),
+        notificaiton=datetime(2022, 3, 29, 12, 00, 00),
+        memo ='〇〇の締め切り',
     )
     print(task)
     db.session.add(task)
