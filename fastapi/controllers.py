@@ -5,6 +5,7 @@ from starlette.responses import RedirectResponse
 from starlette.requests import Request
 from starlette.status import HTTP_401_UNAUTHORIZED 
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import db 
 from models import User, Task 
 from auth import auth
@@ -21,6 +22,22 @@ class Body(BaseModel):
     limitDate: str
     notification: str
     memo: str
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    'http://localhost:8000',
+    'http://localhost:3000',
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 def index(request: Request):
