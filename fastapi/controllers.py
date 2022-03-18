@@ -2,7 +2,6 @@ from ast import For
 from fastapi import FastAPI, Depends, HTTPException, Form 
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from starlette.responses import RedirectResponse
-from starlette.templating import Jinja2Templates
 from starlette.requests import Request
 from starlette.status import HTTP_401_UNAUTHORIZED 
 from fastapi.responses import JSONResponse
@@ -11,8 +10,18 @@ from models import User, Task
 from auth import auth
 from datetime import datetime
 import hashlib
+from pydantic import BaseModel
+
 app = FastAPI()
 security = HTTPBasic()
+
+class Body(BaseModel):
+    title: str
+    goalDate: str
+    limitDate: str
+    notification: str
+    memo: str
+
 
 def index(request: Request):
     return {'Hello': 'World'}
@@ -50,20 +59,15 @@ def detail(request: Request, t_id):
     
     return JSONResponse(content = task)
 
-async def add(request: Request):
-
-    data = await request.form()
-    year = int(data['year'])
-    month = int(data['month'])
-    day = int(data['day'])
-    hour = int(data['hour'])
-    minute = int(data['minute'])
-
-    deadline = datetime(year=year, month=month, day=day,
-                        hour=hour, minute=minute)
-
+async def add(body: Body):
+    title = Body.title
+    goalDate = datetime.strptime(Body.goalDate, '%Y-%m-%d %H:%M:%S')
+    limitDate = datetime.strptime(Body.limitDate, '%Y-%m-%d %H:%M:%S')
+    notification = datetime.strptime(Body.notification, '%Y-%m-%d %H:%M:%S')
+    memo = Body.memo
+    
     # 新しくタスクを生成しコミット
-    task = Task(data['content'], deadline)
+    task = Task(title, goalDate, limitDate, notification, memo)
     db.session.add(task)
     db.session.commit()
     db.session.close()
