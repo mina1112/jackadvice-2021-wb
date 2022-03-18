@@ -73,15 +73,11 @@ class Task(Base):
     date = Column("date", DateTime, default=None)
     done = Column('done', BOOLEAN, default=False, nullable=False)
 
-    def __init__(self, user_id: int, content: str, deadline: datetime, date: datetime = datetime.now()):
+    def __init__(self, user_id: int, taskname: str, content: str, deadline: datetime, date: datetime = datetime.now()):
         self.user_id = user_id
+        self.taskname = taskname
         self.content = content
+        self.date = date
         self.deadline = deadline
         self.done = False
 
-    def __str__(self):
-        return str(self.id) + \
-                ': user_id -> ' + str(self.user_id) + \
-                ', content -> ' + self.content + \
-                ', deadline -> ' + self.deadline.strftime('%Y/%m/%d - %H:%M:%S') + \
-                ', done -> ' + str(self.done)

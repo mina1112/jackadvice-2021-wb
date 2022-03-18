@@ -21,6 +21,15 @@ def admin(request: Request):
 
     task = db.session.query(Task).all()
     db.session.close()
+    task = [{
+        'id': t.id,
+        'content': t.content,
+        'taskname': t.taskname,
+        'deadline': t.deadline.strftime('%Y-%m-%d %H:%M:%S'),
+        'date': t.date.strftime('%Y-%m-%d %H:%M:%S'),
+        'done': t.done,
+    } for t in task]
+    
     return JSONResponse(content = task)
 
 
@@ -29,6 +38,14 @@ def detail(request: Request, t_id):
 
     task = db.session.query(Task).filter(Task.id == t_id).first()
     db.session.close()
+    task = [{
+        'id': t.id,
+        'content': t.content,
+        'taskname': t.taskname,
+        'deadline': t.deadline.strftime('%Y-%m-%d %H:%M:%S'),
+        'date': t.date.strftime('%Y-%m-%d %H:%M:%S'),
+        'done': t.done,
+    } for t in task]
     return JSONResponse(content = task)
 
 async def add(request: Request):
