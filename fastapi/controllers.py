@@ -53,6 +53,7 @@ def admin(request: Request):
         'goalDate': t.goalDate.strftime('%Y-%m-%d %H:%M:%S'),
         'limitDate': t.limitDate.strftime('%Y-%m-%d %H:%M:%S'),
         'notification': t.notification.strftime('%Y-%m-%d %H:%M:%S'),
+        'memo': t.memo,
         'done': t.done,
     } for t in task]
     
@@ -71,6 +72,7 @@ def detail(request: Request, t_id):
         'goalDate': t.goalDate.strftime('%Y-%m-%d %H:%M:%S'),
         'limitDate': t.limitDate.strftime('%Y-%m-%d %H:%M:%S'),
         'notification': t.notification.strftime('%Y-%m-%d %H:%M:%S'),
+        'memo': t.memo,
         'done': t.done,
     }
     
