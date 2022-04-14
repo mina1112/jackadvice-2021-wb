@@ -3,10 +3,10 @@
     <header>
       <Header />
     </header>
-    <v-col cols="12" class="top">
-      <v-text-field v-model="todo.title" label="タスク" color="#ea5532" outlined></v-text-field>
-    </v-col>
-    <v-col cols="12" class="second">
+    <v-container class="top" fluid>
+      <v-text-field v-model="todo.title" label="タスク" color="#ea5532" outlined />
+    </v-container>
+    <v-container class="second" fluid>
       <v-row>
         <v-col cols="4">
           <div class="caption">終わらせたい日時</div>
@@ -15,9 +15,9 @@
           <input type="datetime-local" style="border: none" v-model="todo.goalDate"/>
         </v-col>
       </v-row>
-    </v-col>
-    <v-divider color="#ea5532"></v-divider>
-    <v-col cols="12">
+    </v-container>
+    <v-divider color="#ea5532" />
+    <v-container fluid>
       <v-row>
         <v-col cols="4">
           <div class="caption">締め切り日時</div>
@@ -26,9 +26,20 @@
           <input type="datetime-local" style="border: none" v-model="todo.limitDate"/>
         </v-col>
       </v-row>
-    </v-col>
-    <v-divider color="#ea5532"></v-divider>
-    <v-col cols="12">
+    </v-container>
+    <v-divider color="#ea5532" />
+    <v-container fluid>
+      <v-row>
+        <v-col cols="4">
+          <div class="caption">設定する音声</div>
+        </v-col>
+        <v-col cols="8" id="select">
+          <v-select id="onseisentaku" item-value="id" item-text="name" :items="tourokuOnseis" label="Solo field" solo color="#ea5532" />
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-divider color="#ea5532" />
+    <v-container fluid>
       <v-row>
         <v-col cols="4">
           <div class="caption">通知</div>
@@ -37,14 +48,14 @@
           <input type="datetime-local" style="border: none" v-model="todo.notification"/>
         </v-col>
       </v-row>
-    </v-col>
-    <v-divider color="#ea5532"></v-divider>
-    <v-col cols="12">
-      <v-textarea v-model="todo.memo" label="メモ" color="#ea5532"></v-textarea>
-    </v-col>
+    </v-container>
+    <v-divider color="#ea5532" />
+    <v-container fluid>
+      <v-textarea v-model="todo.memo" label="メモ" color="#ea5532" />
+    </v-container>
     <div class="btn">
-      <DoneButton></DoneButton>
-      <SaveButton @click.native="SaveData"></SaveButton>
+      <DoneButton />
+      <SaveButton @click.native="SaveData" />
     </div>
   </div>
 </template>
@@ -71,6 +82,10 @@ export default {
               notification: '',
               memo: ''
             },
+            tourokuOnseis: [
+              {id: 1, name: "スタジアムの歓声" },//apiが入ったら[]にする予定
+              {id: 2, name: "威風堂々" },
+           ],
         }
     },
     // todo一覧からidを取得->そのidに対応するdataをAPIから取得
@@ -94,12 +109,34 @@ export default {
           console.log(response.data);
         })
         .catch(error => console.log(error))
-      }
+      },
+      fetchTourokus: function(){
+      axios.get('XML入れるよ')
+      .then(res=>{
+        console.log(res)
+        console.log(res.data)
+      })
+    },
+    fetchSamples: function(){
+      axios
+        .get('XML入れるよ')
+        .then(res=>{
+        console.log(res)
+        console.log(res.data)
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    }
     }
 }
 </script>
 
 <style scoped>
+
+.detail {
+  margin: 0;
+}
 .btn {
   text-align: center;
 }

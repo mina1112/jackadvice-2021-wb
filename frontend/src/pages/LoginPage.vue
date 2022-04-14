@@ -47,11 +47,6 @@ div {
     border-radius: 8px;
     line-height: 40px;
     box-shadow: 2px 2px #020e55;
-}
-
-.logIn:active {
-    box-shadow: none;
-    position: relative;
     top: 1px;
     left: 1px;
 }

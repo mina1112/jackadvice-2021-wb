@@ -14,7 +14,7 @@
       <v-container>
         <v-row>
           <v-col id="select" class="d-flex" cols="12" sm="6" md="6" lg="6" xl="6">
-            <v-select :items="items" label="Solo field" solo></v-select>
+            <v-select :items="items" label="Solo field" solo />
           </v-col>
           <v-col cols="12" sm="6" md="6" lg="6" xl="6">
             <v-btn class="ma-2" outlined color="#ea5532">登録</v-btn>
