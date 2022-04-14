@@ -55,12 +55,12 @@ img{
 
 .signIn {
     margin-top: 75px;
-    background-color: #3f51b5;
+    background-color: #ffffff;
     width: 250px;
     height: 40px;
     border-radius: 8px;
     line-height: 40px;
-    box-shadow: 1px 1px #020e55;
+    box-shadow: 1px 1px #ef845d;
 }
 
 .logIn:active {
