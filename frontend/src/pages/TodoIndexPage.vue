@@ -22,7 +22,13 @@
                 <div class="goalDate">{{ todo.completed }}</div>
                 <div class="rest">あと{{ todo.id }}日</div>
               </div>
-              <DoneButton class="finish"></DoneButton>
+              <v-btn
+                class="finish"
+                color="#ea5532"
+                @click="end(todo.id, todo.title)"
+                :key="todo.id"
+                >Done</v-btn
+              >
             </div>
           </ul>
 
@@ -43,55 +49,15 @@
 <script>
 import Header from '@/components/Header.vue';
 import axios from 'axios';
-import DoneButton from '@/components/DoneButton.vue';
 
 export default {
   name: 'TodoIndexPage',
   components: {
     Header,
-    DoneButton,
   },
   data() {
     return {
       todo: null,
-      //   todos: [
-      //     {
-      //       id: 1,
-      //       title: '課題１を終わらせる',
-      //       goalDate: '2021-8-17.19：00',
-      //       limitDate: '2021-8-20.23：59',
-      //       notification: '2021-8-16.9：00',
-      //       memo: 'なし',
-      //       rest: '2',
-      //     },
-      //     {
-      //       id: 2,
-      //       title: 'レポートAを終わらせる',
-      //       goalDate: '2021-8-20.21:00',
-      //       limitDate: '2021-8-26.23:00',
-      //       notification: '8-19.9:00',
-      //       memo: '4000字だよ一日じゃ終わらないよ',
-      //       rest: '5',
-      //     },
-      //     {
-      //       id: 3,
-      //       title: '経営学テキスト読んでくる',
-      //       goalDate: '2021-9-1.23:00',
-      //       limitDate: '2021-9-2.10:30',
-      //       notification: '2021-8-31.9:00',
-      //       memo: 'p.123-150',
-      //       rest: '16',
-      //     },
-      //     {
-      //       id: 4,
-      //       title: '機構アカウント作る',
-      //       goalDate: '2021-9-20.21:00',
-      //       limitDate: '2021-9-27.23:59',
-      //       notofication: '2021-9-19.9:00',
-      //       memo: 'なし',
-      //       rest: '36',
-      //     },
-      //   ],
     };
   },
 
@@ -100,6 +66,28 @@ export default {
       .get('https://jsonplaceholder.typicode.com/todos')
       .then((response) => (this.todo = response.data))
       .catch((error) => console.log(error));
+  },
+  methods: {
+    end: function (id, title) {
+      console.log(this.todo);
+      const res = confirm(
+        'todo「' + title + '」を完了します。よろしいですか？'
+      );
+      if (res == true) {
+        axios
+          .delete(`https://jsonplaceholder.typicode.com/todos/${id}`) //まだ実際のデータではないので削除はされません。
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error));
+        alert('todoを削除しました。お疲れ様です！');
+        //this.$router.push({ path: '/todo', name: 'TodoIndexPage' });
+      } else {
+        alert('キャンセルされました');
+      }
+    },
+    // リストからカードを削除する
+    deleteItem: function (index) {
+      this.todos.splice(index, 1);
+    },
   },
 };
 </script>
@@ -160,6 +148,7 @@ img {
   width: 25%;
   height: 2em;
   border-radius: 0.5rem;
+  color: #fff;
   font-size: 1.1rem;
   text-align: center;
   text-decoration: none;
