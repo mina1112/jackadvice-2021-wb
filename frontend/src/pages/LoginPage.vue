@@ -1,71 +1,52 @@
 <template>
-  <div class="login">
-    <!--ここにhtmlを書いてね-->
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>ToDo</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="logo">
-                <img src="../assets/hanamar_icon.jpg">
-            </div>
-            <div class="logIn">
-                <a href="#">log in</a>
-            </div>
-            <div class="signIn">
-                <a href="#">sign up</a>
-            </div>
+<div>
+    <MyHeader></MyHeader>
+    <div class="container">
+        <div class="logo">
+            <img src="../assets/hanamar_icon.jpg">
         </div>
-    </body>
-    </html>
-  </div>
+        <div class="logIn">
+            <a href="#">log in</a>
+        </div>
+        <div class="signIn">
+            <a href="#">sign up</a>
+        </div>
+    </div>
+</div>
 </template>
 <script>
+import MyHeader from '../components/Header.vue'
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  components: {
+      MyHeader
+  }
 }
-// ここにjavascriptを書いてね
 </script>
 
 <style scoped>
-/* ここにcssを書いてね */
 div {
-    max-width: 480px;
-    margin: auto;
+    margin: 0 auto;
     text-align: center;
 }
 
-img{
-    height: 300px;
-    padding-top: 100px;
-}
-
 .logIn {
-    margin-top: 100px;
     background-color: #ef845d;
     width: 250px;
     height: 40px;
     border-radius: 8px;
     line-height: 40px;
-    box-shadow: 1px 1px #882906;
+    box-shadow: 2px 2px #882906;
 }
 
 .signIn {
-    margin-top: 75px;
     background-color: #3f51b5;
     width: 250px;
     height: 40px;
     border-radius: 8px;
     line-height: 40px;
-    box-shadow: 1px 1px #020e55;
-}
-
-.logIn:active {
-    box-shadow: none;
-    position: relative;
+    box-shadow: 2px 2px #020e55;
     top: 1px;
     left: 1px;
 }
@@ -79,22 +60,41 @@ img{
 
 a {
     text-decoration: none;
-    color: white;
+    color: white !important;
     display: block;
 }
 
 @media screen and (min-width:481px) {
-	.container{
-        width: 480px;
-        height: 900px;
-        margin: 0 auto;
-        background-color: rgb(248, 248, 247);
+    img {
+        height: 400px;
+        padding-top: 64px;
+    }
+
+    .logIn {
+        margin-top: 96px;
+    }
+
+    .signIn {
+        margin-top: 64px;
     }
 }
 
 @media screen and (max-width:480px) {
-	.container{
+	.container {
         margin: 0 auto;
+    }
+
+    img {
+        width: 75vw;
+        padding-top: 3rem;
+    }
+
+    .logIn {
+        margin-top: 4rem;
+    }
+
+    .signIn {
+        margin-top: 3rem;
     }
 }
 </style>
